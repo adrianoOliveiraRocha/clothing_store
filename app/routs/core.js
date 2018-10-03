@@ -16,4 +16,8 @@ module.exports = function(application){
     application.app.control.core.single(req, res);
   });
 
+  application.get('/login', function(req, res){
+    application.app.control.core.login(req, res);
+  });
+
 }
