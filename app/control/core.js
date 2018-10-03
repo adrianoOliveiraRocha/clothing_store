@@ -9,3 +9,7 @@ module.exports.contact = function(req, res){
 module.exports.categories = function(req, res){
   res.render('core/categories.ejs');
 }
+
+module.exports.single = function(req, res){
+  res.render('core/single.ejs');
+}

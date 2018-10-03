@@ -12,4 +12,8 @@ module.exports = function(application){
     application.app.control.core.categories(req, res);
   });
 
+  application.get('/single', function(req, res){
+    application.app.control.core.single(req, res);
+  });
+
 }
