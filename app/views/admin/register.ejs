@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <title>Cadastro</title>
+    <%- include('includes/links.ejs'); %>
+  </head>
+  <body>
+    <div class="container" style="margin-top: 5%; margin-bottom: 5%;">
+      <h2 style="margin-bottom: 3%;">Cadastro</h2>
+      <form action="/register" method="POST">
+        <input type="hidden" value="save">
+        <div class="form-group">
+          <label for="name">Nome:</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+          <label for="pwd">Senha:</label>
+          <input type="password" class="form-control" id="pwd">
+        </div>
+        <div class="form-group">
+          <label for="cpf">CPF:</label>
+          <input type="number" class="form-control" id="cpf">
+        </div>
+        <div class="form-group">
+          <label for="public_place">Logradouro:</label>
+          <input type="text" class="form-control" id="public_place">
+        </div>
+        <div class="form-group">
+          <label for="number">Número:</label>
+          <input type="number" class="form-control" id="number">
+        </div>
+        <div class="form-group">
+          <label for="cep">CEP:</label>
+          <input type="text" class="form-control" id="cep">
+        </div>
+        <div class="form-group">
+          <label for="complement">Complemento:</label>
+          <input type="text" class="form-control" id="complement">
+        </div>
+        <div class="form-group">
+          <label for="neighborhood">Bairro:</label>
+          <input type="text" class="form-control" id="neighborhood">
+        </div>
+        <div class="form-group">
+          <label for="city">Cidade:</label>
+          <input type="text" class="form-control" id="city">
+        </div>
+        <div class="form-group">
+          <label for="state">Estado:</label>
+          <select class="form-control" id="state">
+            <option value="ac">Acre</option>
+            <option value="al">Alagoas</option>
+            <option value="ap">Amapá</option>
+            <option value="am">Amazonas</option>
+            <option value="ba">Bahia</option>
+            <option value="ce">Ceará</option>
+            <option value="df">Distrito Federal</option>
+            <option value="es">Espírito Santo</option>
+            <option value="go">Goiás</option>
+            <option value="ma">Maranhão</option>
+            <option value="mt">Mato Grosso</option>
+            <option value="ms">Mato Grosso do Sul</option>
+            <option value="mg">Minas Gerais</option>
+            <option value="pa">Pará</option>
+            <option value="pb">Paraíba</option>
+            <option value="pe">Pernambuco</option>
+            <option value="pi">Piauí</option>
+            <option value="rj">Rio de Janeiro</option>
+            <option value="rn">Rio Grande do Norte</option>
+            <option value="rs">Rio Grande do Sul</option>
+            <option value="ro">Rondônia</option>
+            <option value="rr">Rpraima</option>
+            <option value="sc">Santa Catarina</option>
+            <option value="sp">São Paulo</option>
+            <option value="se">Sergipe</option>
+            <option value="to">Tocantins</option>
+          </select>
+          </select>
+        </div>
+
+        <!-- <div class="form-group form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox"> Remember me
+          </label>
+        </div> -->
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        
+        <button type="button" class="btn btn-primary" onclick="homeSite();">
+          Cancelar
+        </button>
+
+      </form>
+
+    </div>
+  </body>
+
+</html>
