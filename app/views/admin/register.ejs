@@ -3,89 +3,181 @@
     <title>Cadastro</title>
     <%- include('includes/links.ejs'); %>
   </head>
+  
   <body>
     <div class="container" style="margin-top: 5%; margin-bottom: 5%;">
       <h2 style="margin-bottom: 3%;">Cadastro</h2>
+
+      <%- include('includes/validation.ejs'); %>
+
       <form action="/register" method="POST">
         <input type="hidden" value="save">
         <div class="form-group">
           <label for="name">Nome:</label>
-          <input type="text" class="form-control" id="name">
+          <input type="text" class="form-control" id="name" name="name"
+          value="<%= data.name %>">
         </div>
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" class="form-control" id="email">
+          <input type="email" class="form-control" id="email" name="email"
+          value="<%= data.email %>">
         </div>
         <div class="form-group">
           <label for="pwd">Senha:</label>
-          <input type="password" class="form-control" id="pwd">
+          <input type="password" class="form-control" id="pwd" name="pwd"
+          value="<%= data.pwd %>">
+        </div>
+        <div class="form-group">
+          <label for="pwd2">Digite a Senha Novamente:</label>
+          <input type="password" class="form-control" id="pwd2" name="pwd2"
+          value="<%= data.pwd2 %>">
         </div>
         <div class="form-group">
           <label for="cpf">CPF:</label>
-          <input type="number" class="form-control" id="cpf">
+          <input type="number" class="form-control" id="cpf" name="cpf"
+          value="<%= data.cpf %>">
         </div>
         <div class="form-group">
           <label for="public_place">Logradouro:</label>
-          <input type="text" class="form-control" id="public_place">
+          <input type="text" class="form-control" id="public_place" 
+          name="public_place" value="<%= data.place_public %>">
         </div>
         <div class="form-group">
           <label for="number">Número:</label>
-          <input type="number" class="form-control" id="number">
+          <input type="number" class="form-control" id="number" name="number"
+          value="<%= data.number %>">
         </div>
         <div class="form-group">
           <label for="cep">CEP:</label>
-          <input type="text" class="form-control" id="cep">
+          <input type="text" class="form-control" id="cep" name="cep"
+          value="<%= data.cep %>">
         </div>
         <div class="form-group">
           <label for="complement">Complemento:</label>
-          <input type="text" class="form-control" id="complement">
+          <input type="text" class="form-control" id="complement" 
+          name="complement" value="<%= data.complement %>">
         </div>
         <div class="form-group">
           <label for="neighborhood">Bairro:</label>
-          <input type="text" class="form-control" id="neighborhood">
+          <input type="text" class="form-control" id="neighborhood" 
+          name="neighborhood" value="<%= data.neighborhood %>">
         </div>
         <div class="form-group">
           <label for="city">Cidade:</label>
-          <input type="text" class="form-control" id="city">
+          <input type="text" class="form-control" id="city" name="city"
+          value="<%= data.city %>">
         </div>
         <div class="form-group">
           <label for="state">Estado:</label>
-          <select class="form-control" id="state">
-            <option value="ac">Acre</option>
-            <option value="al">Alagoas</option>
-            <option value="ap">Amapá</option>
-            <option value="am">Amazonas</option>
-            <option value="ba">Bahia</option>
-            <option value="ce">Ceará</option>
-            <option value="df">Distrito Federal</option>
-            <option value="es">Espírito Santo</option>
-            <option value="go">Goiás</option>
-            <option value="ma">Maranhão</option>
-            <option value="mt">Mato Grosso</option>
-            <option value="ms">Mato Grosso do Sul</option>
-            <option value="mg">Minas Gerais</option>
-            <option value="pa">Pará</option>
-            <option value="pb">Paraíba</option>
-            <option value="pe">Pernambuco</option>
-            <option value="pi">Piauí</option>
-            <option value="rj">Rio de Janeiro</option>
-            <option value="rn">Rio Grande do Norte</option>
-            <option value="rs">Rio Grande do Sul</option>
-            <option value="ro">Rondônia</option>
-            <option value="rr">Rpraima</option>
-            <option value="sc">Santa Catarina</option>
-            <option value="sp">São Paulo</option>
-            <option value="se">Sergipe</option>
-            <option value="to">Tocantins</option>
+          <select class="form-control" id="state" name="state">
+            <option value="ac"
+            <% if(data.state == 'ac') { %> selected <% } %>>
+              Acre
+            </option>
+            <option value="al"
+            <% if(data.state == 'al') { %> selected <% } %>>
+              Alagoas
+            </option>
+            <option value="ap"
+            <% if(data.state == 'ap') { %> selected <% } %>>
+              Amapá
+            </option>
+            <option value="am"
+            <% if(data.state == 'am') { %> selected <% } %>>
+              Amazonas
+            </option>
+            <option value="ba"
+            <% if(data.state == 'ba') { %> selected <% } %>>
+              Bahia
+            </option>
+            <option value="ce"
+            <% if(data.state == 'ce') { %> selected <% } %>>
+              Ceará
+            </option>
+            <option value="df"
+            <% if(data.state == 'df') { %> selected <% } %>>
+              Distrito Federal
+            </option>
+            <option value="es"
+            <% if(data.state == 'es') { %> selected <% } %>>
+              Espírito Santo
+            </option>
+            <option value="go"
+            <% if(data.state == 'go') { %> selected <% } %>>
+              Goiás
+            </option>
+            <option value="ma"
+            <% if(data.state == 'ma') { %> selected <% } %>>
+              Maranhão
+            </option>
+            <option value="mt"
+            <% if(data.state == 'mt') { %> selected <% } %>>
+              Mato Grosso
+            </option>
+            <option value="ms"
+            <% if(data.state == 'ms') { %> selected <% } %>>
+              Mato Grosso do Sul
+            </option>
+            <option value="mg"
+            <% if(data.state == 'mg') { %> selected <% } %>>
+              Minas Gerais
+            </option>
+            <option value="pa"
+            <% if(data.state == 'pa') { %> selected <% } %>>
+              Pará
+            </option>
+            <option value="pb"
+            <% if(data.state == 'pb') { %> selected <% } %>>
+              Paraíba
+            </option>
+            <option value="pe"
+            <% if(data.state == 'pe') { %> selected <% } %>>
+              Pernambuco
+            </option>
+            <option value="pi"
+            <% if(data.state == 'pi') { %> selected <% } %>>
+              Piauí
+            </option>
+            <option value="rj"
+            <% if(data.state == 'rj') { %> selected <% } %>>
+              Rio de Janeiro
+            </option>
+            <option value="rn"
+            <% if(data.state == 'rn') { %> selected <% } %>>
+              Rio Grande do Norte
+            </option>
+            <option value="rs"
+            <% if(data.state == 'rs') { %> selected <% } %>>
+              Rio Grande do Sul
+            </option>
+            <option value="ro"
+            <% if(data.state == 'ro') { %> selected <% } %>>
+              Rondônia
+            </option>
+            <option value="rr"
+            <% if(data.state == 'rr') { %> selected <% } %>>
+              Rpraima
+            </option>
+            <option value="sc"
+            <% if(data.state == 'sc') { %> selected <% } %>>
+              Santa Catarina
+            </option>
+            <option value="sp"
+            <% if(data.state == 'sp') { %> selected <% } %>>
+              São Paulo
+            </option>
+            <option value="se"
+            <% if(data.state == 'se') { %> selected <% } %>>
+              Sergipe
+            </option>
+            <option value="to"
+            <% if(data.state == 'to') { %> selected <% } %>>
+              Tocantins
+            </option>
           </select>
           </select>
         </div>
 
-        <!-- <div class="form-group form-check">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox"> Remember me
-          </label>
-        </div> -->
         <button type="submit" class="btn btn-primary">Enviar</button>
         
         <button type="button" class="btn btn-primary" onclick="homeSite();">
