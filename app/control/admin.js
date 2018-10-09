@@ -1,5 +1,40 @@
-module.exports.login = function(req, res){
-  res.render('admin/login.ejs');
+module.exports.login = function (req, res, application){
+  if (req.method == 'GET') {
+    res.render('admin/login.ejs', { data: {}, validation: {} });
+  } else {
+    var data = req.body;
+    req.assert('email', 'Digite seu email corretamente!').isEmail();
+    req.assert('pwd', 'Senha é obrigatório!').notEmpty(); 
+    var errors = req.validationErrors();
+
+    if (errors) {
+      res.render('admin/login.ejs', { data: data, validation: errors });
+    } else {
+      var connection = application.config.connect();
+      var user = new application.app.models.User(connection);
+      user.auth(data, function (error, result) {
+        if (error !== null && error.fatal == true) {
+          res.send(error.sqlMessage);
+        } else {
+          if (result.length > 0) {// user exists
+            req.session.loged = true;
+            req.session.email = data.email;
+            req.session.pwd = data.pwd;
+            res.redirect('/');
+          } else {// user not exists
+            res.render('error/index.ejs');
+          }
+        }
+      });
+    }
+
+  }
+  
+}
+
+module.exports.logout = function (req, res) {
+  req.session.destroy();
+  res.redirect('/');
 }
 
 module.exports.signup = function (req, res, application) {
@@ -27,13 +62,13 @@ module.exports.signup = function (req, res, application) {
             req.session.loged = true;
             req.session.email = data.email;
             req.session.pwd = data.pwd;
-            req.session.save(function(err){
-              if (err) {
-                console.log('dont was possible save this session');
-              } else {
-                console.log('session saved');
-              }
-            });
+            // req.session.save(function(err){
+            //   if (err) {
+            //     console.log('dont was possible save this session');
+            //   } else {
+            //     console.log('session saved');
+            //   }
+            // });
             res.redirect('/');
           }          
         });      

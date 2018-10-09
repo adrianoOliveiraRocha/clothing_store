@@ -10,6 +10,12 @@ class User {
     this._connection.query(stm, callback);
   }
 
+  auth(data, callback){
+    let stm = `select * from user 
+    where email = '${data.email}' and password = '${data.pwd}'`;
+    this._connection.query(stm, callback);
+  }
+
 }
 
 module.exports = function () {

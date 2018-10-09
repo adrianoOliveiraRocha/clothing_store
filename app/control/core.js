@@ -1,26 +1,36 @@
 module.exports.index = function(req, res){
-  console.log(req.session);
-  
+  var user = {};
   if (req.session.loged) {
-    console.log('loged');    
-  } else {
-    console.log('no loged');
+    user.email = req.session.email;    
   }
-  res.render('core/index.ejs');
+
+  res.render('core/index.ejs', { user: user });
 
 }
 
 module.exports.contact = function(req, res){
-  console.log('contact');  
-  res.render('core/contact.ejs');
+  var user = {};
+  if (req.session.loged) {
+    user.email = req.session.email;
+  }
+
+  res.render('core/contact.ejs', { user: user });
 }
 
 module.exports.categories = function(req, res){
-  console.log('categories tes');  
-  res.render('core/categories.ejs');
+  var user = {};
+  if (req.session.loged) {
+    user.email = req.session.email;
+  }
+
+  res.render('core/categories.ejs', { user: user });
 }
 
 module.exports.single = function(req, res){
-  console.log('single');
-  res.render('core/single.ejs');
+  var user = {};
+  if (req.session.loged) {
+    user.email = req.session.email;
+  }
+
+  res.render('core/single.ejs', { user: user });
 }

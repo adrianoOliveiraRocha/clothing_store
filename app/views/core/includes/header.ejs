@@ -39,6 +39,25 @@
                 </ul>
               </li>
               
+              <% if(user.email){ %>
+              <!-- loged -->
+              <li class="account">
+                <a href="#">
+                  <%= user.email %>
+                  <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="account_selection">
+                  <li>
+                    <a href="/logout">
+                      <i class="fa fa-sign-in" aria-hidden="true"></i>
+                      Logout
+                    </a>
+                  </li>
+                                   
+                </ul>
+              </li>
+              <% } else { %>
+              <!-- no loged -->
               <li class="account">
                 <a href="#">
                   Minha Conta
@@ -46,13 +65,17 @@
                 </a>
                 <ul class="account_selection">
                   <li>
-                    <a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
+                    <a href="/login">
+                      <i class="fa fa-sign-in" aria-hidden="true"></i>
+                      Login
+                    </a>
                   </li>
                   <li>
                     <a href="/signup"><i class="fa fa-user-plus" aria-hidden="true"></i>Cadastro</a>
                   </li>
                 </ul>
               </li>
+              <% } %>
 
             </ul>
           </div>
