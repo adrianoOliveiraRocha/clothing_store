@@ -16,7 +16,7 @@ module.exports.contact = function(req, res){
 }
 
 module.exports.categories = function(req, res){
-  console.log('categories');  
+  console.log('categories tes');  
   res.render('core/categories.ejs');
 }
 

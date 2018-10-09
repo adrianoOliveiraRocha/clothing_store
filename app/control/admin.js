@@ -27,6 +27,13 @@ module.exports.signup = function (req, res, application) {
             req.session.loged = true;
             req.session.email = data.email;
             req.session.pwd = data.pwd;
+            req.session.save(function(err){
+              if (err) {
+                console.log('dont was possible save this session');
+              } else {
+                console.log('session saved');
+              }
+            });
             res.redirect('/');
           }          
         });      
