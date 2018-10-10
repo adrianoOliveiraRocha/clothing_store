@@ -16,13 +16,20 @@ module.exports.login = function (req, res, application){
         if (error !== null && error.fatal == true) {
           res.send(error.sqlMessage);
         } else {
+
           if (result.length > 0) {// user exists
             req.session.loged = true;
             req.session.email = data.email;
             req.session.pwd = data.pwd;
-            res.redirect('/');
+            if (result[0].is_staff === 0) {// is not admin
+              res.redirect('/');  
+            } else {// is admin
+              res.redirect('/admin');
+            }
+            
           } else {// user not exists
-            res.render('error/index.ejs');
+            let msg = "Usuário não encontrado";
+            res.render('core/error/index.ejs', { msg: msg });
           }
         }
       });
@@ -62,13 +69,6 @@ module.exports.signup = function (req, res, application) {
             req.session.loged = true;
             req.session.email = data.email;
             req.session.pwd = data.pwd;
-            // req.session.save(function(err){
-            //   if (err) {
-            //     console.log('dont was possible save this session');
-            //   } else {
-            //     console.log('session saved');
-            //   }
-            // });
             res.redirect('/');
           }          
         });      
@@ -88,4 +88,20 @@ module.exports.signup = function (req, res, application) {
     } 
     
   }
+}
+
+module.exports.admin = function (req, res, application) {
+  res.render('admin/index.ejs');
+}
+
+module.exports.calendar = function (req, res, application) {
+  res.render('admin/calendar.ejs');
+}
+
+module.exports.stats = function (req, res, application) {
+  res.render('admin/stats.ejs');
+}
+
+module.exports.tables = function (req, res, application) {
+  res.render('admin/tables.ejs');
 }
