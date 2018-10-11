@@ -105,3 +105,7 @@ module.exports.stats = function (req, res, application) {
 module.exports.tables = function (req, res, application) {
   res.render('admin/tables.ejs');
 }
+
+module.exports.profile = function (req, res, application) {
+  res.render('admin/profile.ejs');
+}

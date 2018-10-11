@@ -36,4 +36,8 @@ module.exports = function(application){
     application.app.control.admin.tables(req, res, application);
   });
 
+  application.get('/profile', function (req, res) {
+    application.app.control.admin.profile(req, res, application);
+  });
+
 }
