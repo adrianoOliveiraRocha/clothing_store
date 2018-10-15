@@ -1,7 +1,7 @@
 module.exports.index = function(req, res){
   var user = {};
   if (req.session.loged) {
-    user.email = req.session.email;    
+    user.email = req.session.user.email;    
   }
 
   res.render('core/index.ejs', { user: user });

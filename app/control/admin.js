@@ -1,6 +1,11 @@
 module.exports.login = function (req, res, application){
   if (req.method == 'GET') {
-    res.render('admin/login.ejs', { data: {}, validation: {} });
+    if (req.session.loged) {
+      let msg = "Você já está logado";
+      res.render('core/error/index.ejs', { msg: msg });
+    } else {
+      res.render('admin/login.ejs', { data: {}, validation: {} });
+    }    
   } else {
     var data = req.body;
     req.assert('email', 'Digite seu email corretamente!').isEmail();
@@ -16,11 +21,10 @@ module.exports.login = function (req, res, application){
         if (error !== null && error.fatal == true) {
           res.send(error.sqlMessage);
         } else {
-
           if (result.length > 0) {// user exists
+            console.log('the user was founded');
             req.session.loged = true;
-            req.session.email = data.email;
-            req.session.pwd = data.pwd;
+            req.session.user = result[0];
             if (result[0].is_staff === 0) {// is not admin
               res.redirect('/');  
             } else {// is admin
@@ -66,10 +70,7 @@ module.exports.signup = function (req, res, application) {
           if (error) {
             res.send(error);
           } else {
-            req.session.loged = true;
-            req.session.email = data.email;
-            req.session.pwd = data.pwd;
-            res.redirect('/');
+            res.redirect('/login');
           }          
         });      
 
@@ -90,13 +91,20 @@ module.exports.signup = function (req, res, application) {
   }
 }
 
-module.exports.admin = function (req, res, application) {
-  res.render('admin/index.ejs');
+module.exports.admin = function (req, res, applicationl) {
+  
+  if (req.session.loged && req.session.user.is_staff === 1 
+    && req.session.user.is_active === 1) {
+    res.render('admin/index.ejs');  
+  } else {
+    let msg = "Desculpe, você não tem permissão para acessar essa página";
+    res.render('core/error/index.ejs', { msg: msg });
+  }  
+
 }
 
 module.exports.calendar = function (req, res, application) {
-  res.render('admin/calendar.ejs');
-}
+  res.render('admin/calendar.ejs');}
 
 module.exports.stats = function (req, res, application) {
   res.render('admin/stats.ejs');
@@ -107,5 +115,32 @@ module.exports.tables = function (req, res, application) {
 }
 
 module.exports.profile = function (req, res, application) {
-  res.render('admin/profile.ejs');
+  if (req.method === 'GET') {
+    res.render('admin/profile.ejs', 
+    { 
+      user: req.session.user,
+      validation: {},
+     });  
+  } else {
+    var data = req.body;
+    req.assert('email', 'Digite seu email corretamente!').isEmail();
+    req.assert('pwd', 'Senha é obrigatório!').notEmpty();
+    
+    var errors = req.validationErrors();
+    if (errors) {
+      res.render('admin/profile.ejs', 
+      { 
+        user: req.session.user,
+        validation: errors,
+      });
+    } else {
+      currentUser = req.session.user;
+      newUser = req.body;
+      var connection = application.config.connect();
+      let msg = application.app.models.User.update(
+        connection, currentData, newData);
+      res.send(msg);
+    }
+    
+  }  
 }
