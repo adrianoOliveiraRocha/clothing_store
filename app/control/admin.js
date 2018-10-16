@@ -22,7 +22,6 @@ module.exports.login = function (req, res, application){
           res.send(error.sqlMessage);
         } else {
           if (result.length > 0) {// user exists
-            console.log('the user was founded');
             req.session.loged = true;
             req.session.user = result[0];
             if (result[0].is_staff === 0) {// is not admin
@@ -116,13 +115,26 @@ module.exports.tables = function (req, res, application) {
 
 module.exports.profile = function (req, res, application) {
   if (req.method === 'GET') {
-    res.render('admin/profile.ejs', 
-    { 
-      user: req.session.user,
-      validation: {},
-     });  
+
+    var connection = application.config.connect();
+    var user = new application.app.models.User(connection);
+    user.getLogedUser(req.session.user.id, 
+      function(error, result){
+        if (error) {
+          res.send(error);
+        } else {
+          logedUser = result[0];
+          res.render('admin/profile.ejs',
+            { 
+              user: result[0], 
+              validation: {},
+              expressFlash: req.flash('success')
+            },            
+          );
+        }
+    });
+      
   } else {
-    var data = req.body;
     req.assert('email', 'Digite seu email corretamente!').isEmail();
     req.assert('pwd', 'Senha é obrigatório!').notEmpty();
     
@@ -134,13 +146,23 @@ module.exports.profile = function (req, res, application) {
         validation: errors,
       });
     } else {
-      currentUser = req.session.user;
-      newUser = req.body;
+      currentData = req.session.user;
+      newData = req.body;
       var connection = application.config.connect();
-      let msg = application.app.models.User.update(
-        connection, currentData, newData);
-      res.send(msg);
+      var user = new application.app.models.User(connection);
+      user.update(currentData, newData, function (error, result) {
+        
+        if (error) {
+          res.send(error);
+        } else {
+          req.flash('success', 'Atualizado com sucesso!.');
+          res.redirect('/profile');
+        }
+      });      
+      
     }
     
   }  
 }
+
+

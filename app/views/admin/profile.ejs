@@ -30,6 +30,13 @@
 							</div>
 
 						<div class="panel-body">
+							
+							<% if ( expressFlash.length > 0 ) { %>
+							<p>Message:
+								<%= expressFlash %>
+							</p>
+							<% } %>
+
 							<%- include('includes/validation.ejs'); %>
 							<form action="/profile" method="POST">
 								<div class="form-group">
@@ -87,7 +94,7 @@
 									<input type="text" class="form-control" name="state"
 									value="<%= user.state %>">
 								</div>
-								
+																
 								<button type="submit" class="btn btn-primary">Editar</button>
 							</form>
 						</div>

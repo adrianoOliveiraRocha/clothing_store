@@ -16,8 +16,23 @@ class User {
     this._connection.query(stm, callback);
   }
 
-  static update(connection){
-    return 'i am programmer but i need speak english too!'
+  getLogedUser(id, callback){
+    let stm = `select * from user where id = ${id}`;
+    this._connection.query(stm, callback);
+  }
+
+  update(currentData, newData, callback){
+    let stm = `update user set name = '${newData.name}'
+    , email = '${newData.email}', password = '${newData.pwd}'
+    , cpf = '${newData.cpf}', public_place = '${newData.public_place}'
+    , number = '${newData.number}', cep = '${newData.cep}'
+    , complement = '${newData.complement}'
+    , neighborhood = '${newData.neighborhood}'
+    , city = '${newData.city}', state = '${newData.state}'
+     where id = ${currentData.id}`;
+    
+    this._connection.query(stm, callback);
+    
   }
 
 }
