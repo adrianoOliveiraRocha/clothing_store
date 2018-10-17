@@ -24,6 +24,7 @@ module.exports.login = function (req, res, application){
           if (result.length > 0) {// user exists
             req.session.loged = true;
             req.session.user = result[0];
+            req.session.message = '';
             if (result[0].is_staff === 0) {// is not admin
               res.redirect('/');  
             } else {// is admin
@@ -115,7 +116,7 @@ module.exports.tables = function (req, res, application) {
 
 module.exports.profile = function (req, res, application) {
   if (req.method === 'GET') {
-
+    
     var connection = application.config.connect();
     var user = new application.app.models.User(connection);
     user.getLogedUser(req.session.user.id, 
@@ -123,18 +124,21 @@ module.exports.profile = function (req, res, application) {
         if (error) {
           res.send(error);
         } else {
+          let msg = req.session.message;
+          req.session.message = '';
           logedUser = result[0];
           res.render('admin/profile.ejs',
             { 
               user: result[0], 
               validation: {},
-              expressFlash: req.flash('success')
-            },            
+              msg: msg,
+            }           
           );
         }
     });
       
   } else {
+    
     req.assert('email', 'Digite seu email corretamente!').isEmail();
     req.assert('pwd', 'Senha é obrigatório!').notEmpty();
     
@@ -155,7 +159,7 @@ module.exports.profile = function (req, res, application) {
         if (error) {
           res.send(error);
         } else {
-          req.flash('success', 'Atualizado com sucesso!.');
+          req.session.message = "Editado com sucesso!";
           res.redirect('/profile');
         }
       });      

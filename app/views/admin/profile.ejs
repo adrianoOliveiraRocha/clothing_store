@@ -16,6 +16,13 @@
 			
 		  <div class="col-md-10">
 
+				<% if(msg){ %>
+				<div class="alert alert-success alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Sucesso!</strong> <%=msg%>
+				</div>
+				<% } %>
+
 				<div class="row">
 					<div class="col-md-12">
 						<div class="content-box-large">
@@ -31,12 +38,6 @@
 
 						<div class="panel-body">
 							
-							<% if ( expressFlash.length > 0 ) { %>
-							<p>Message:
-								<%= expressFlash %>
-							</p>
-							<% } %>
-
 							<%- include('includes/validation.ejs'); %>
 							<form action="/profile" method="POST">
 								<div class="form-group">
