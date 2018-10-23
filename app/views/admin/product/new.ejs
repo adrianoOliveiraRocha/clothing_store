@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%- include('../includes/linkscssprofile.ejs'); %>
+</head>
+
+<body>
+
+  <%- include('../includes/head.ejs'); %>
+
+  <div class="page-content">
+    <div class="row">
+
+      <%- include('../includes/leftcolumn.ejs'); %>
+
+      <div class="col-md-10">
+
+        <% if(msg){ %>
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Sucesso!</strong>
+          <%=msg%>
+        </div>
+        <% } %>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="content-box-large">
+              <div class="panel-heading">
+                <div class="panel-title">Novo Produto</div>
+
+              </div>
+
+              <div class="panel-body">
+
+                <%- include('../includes/validation.ejs'); %>
+                <form action="/nova_categoria" method="POST"
+                enctype="multipart/form-data">
+
+                  <div class="form-group">
+                    <label for="name">Título:</label>
+                    <input type="text" class="form-control" name="title" 
+                    value="<%=data.title%>">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="description">Descrição:</label>
+                    <input type="text" class="form-control" name="description" 
+                    value="<%=data.description%>">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="price">Preço:</label>
+                    <input type="number" class="form-control" name="price" 
+                    value="<%=data.price%>">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="promotional_price">Preço Promocional:</label>
+                    <input type="number" class="form-control" name="promotional_price" 
+                    value="<%=data.promotional_price%>">
+                  </div>
+
+                  <%- include('../includes/coloroptions.ejs'); %>
+
+                  
+
+                  <button type="submit" class="btn btn-primary">Salvar</button>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <%- include('../includes/footer.ejs'); %>
+
+  <%- include('../includes/linksjsprofile.ejs'); %>
+
+</body>
+
+</html>

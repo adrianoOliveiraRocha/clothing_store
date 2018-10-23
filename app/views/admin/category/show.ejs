@@ -16,7 +16,13 @@
       <%- include('../includes/leftcolumn.ejs'); %>
 
       <div class="col-md-10">
-
+        <% if(msg){ %>
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Ok!</strong>
+          <%=msg%>
+        </div>
+        <% } %>
         <div class="content-box-large">
           <div class="panel-heading">
             <div class="panel-title">Bootstrap dataTables</div>
@@ -32,7 +38,11 @@
               <tbody>
                 <% for(var category of data) {%>
                 <tr class="odd gradeX">
-                  <td><%= category.id %></td>
+                  <td>
+                    <a href="/detalhes?id=<%= category.id %>" >
+                      <%= category.id %>
+                    </a>
+                  </td>
                   <td><%= category.title %></td>
                 </tr>
                 <% } %>
@@ -41,29 +51,13 @@
           </div>
         </div>
 
-
-
       </div>
     </div>
   </div>
 
   <%- include('../includes/footer.ejs'); %>
-
-  <link href="admin/vendors/datatables/dataTables.bootstrap.css" rel="stylesheet" media="screen">
-
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <!-- jQuery UI -->
-  <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="admin/bootstrap/js/bootstrap.min.js"></script>
-
-  <script src="admin/vendors/datatables/js/jquery.dataTables.min.js"></script>
-
-  <script src="admin/vendors/datatables/dataTables.bootstrap.js"></script>
-
-  <script src="admin/js/custom.js"></script>
-  <script src="admin/js/tables.js"></script>
+  <%- include('../includes/linksshowcategoriesjs.ejs'); %>  
+  
 </body>
 
 </html>

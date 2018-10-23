@@ -15,6 +15,17 @@ class Category {
     this._connection.query(stm, callback);
   }
 
+  getThis(id, callback){
+    let stm = `select * from category where id = ${id}`;
+    this._connection.query(stm, callback);
+  }
+
+  update(stm, callback){
+    console.log(stm);
+    
+    this._connection.query(stm, callback);
+  }
+
 }
 
 module.exports = function () {

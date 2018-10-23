@@ -12,4 +12,12 @@ module.exports = function(application) {
     application.app.control.category.show(req, res, application);
   });
 
+  application.get('/detalhes', function (req , res){
+    application.app.control.category.detail(req, res, application);
+  });
+
+  application.post('/detalhes', function (req, res) {
+    application.app.control.category.detail(req, res, application);
+  });
+
 }
